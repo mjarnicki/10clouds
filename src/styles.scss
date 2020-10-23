@@ -1,0 +1,46 @@
+body{
+    background: #242424;
+    position: relative;
+    margin: 0;
+    background-image: url('assets/img/gredient.svg');
+    background-repeat: no-repeat;
+}
+
+body, input, select {
+    font-family: 'Roboto', sans-serif;
+}
+
+:root {
+    --primary-color: #8658EB;
+    --secondary-color: #652AE6;
+    --lt-gray: #DADAED; 
+    --dk-gray: #F9F9FB;
+    --green: #1BFEC0;
+}
+
+.flex{
+    display: flex;
+}
+.space-between{
+    justify-content: space-between;
+}
+
+.align-end{
+    align-items: flex-end;
+}
+
+@function rem-calc($size) {
+    $remSize: $size / 16;
+    @return #{$remSize}rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+  }
+

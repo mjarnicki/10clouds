@@ -1,0 +1,59 @@
+<div class="container">
+  <header>
+    <h1 class="title">
+      Your account
+    </h1>
+  </header>
+  <main class="form__container">
+    <aside class="form__left-box">
+      <img class="form__left-box-image" src="../assets/img/lines.png" alt="lines">
+    </aside>
+    <section class="form__right-box">
+      <h2 class="form__title">Provide personal information so that we can create a new account for you.</h2>
+      <form action="">
+
+        <div class="form__row">
+          <label class="form__input-label" for="name">Your name</label>
+          <input class="form__text-input" type="text" name="name" id="name" placeholder="name" required minlength="3">
+        </div>
+        
+        <div class="form__row">
+          <label class="form__input-label" for="area-code">Mobile</label>
+          
+          <div class="flex space-between">
+            <select class="form__text-input" name="area-code" id="area-code" required>
+              <option *ngFor="let code of codeList" value="{{code.dial_code}}">{{code.dial_code}} ({{code.code}})</option>
+            </select>
+            <input class="form__text-input form__input--mobile" type="tel" name="tel" id="tel" placeholder="mobile" required minlength="9">
+          </div>
+        </div>
+        <div class="form__row">
+          <label class="form__input-label">Can you play chess?</label>
+          
+          <div class="flex">
+            
+            <input class="form__radio-input" type="radio" id="play" name="chess" value="true">
+            <label class="form__radio-label" for="play">Yes</label>
+            
+            <input class="form__radio-input" type="radio" id="dont-play" name="chess" value="false" checked>
+            <label class="form__radio-label" for="dont-play">No</label>
+            
+          </div>
+          
+        </div>
+        <div class="form__row">
+          <label class="form__input-label">Date of birth</label>
+          <div class="flex align-end">
+            
+            <input class="form__date-input form__date-input--day" type="number" min="1" max="31" placeholder="day" value="01">
+            <span class="form__date-separator"></span>
+            <select class="form__date-input" name="month" placeholder="month" required>
+              <option *ngFor="let month of monthList" value="{{month.value}}">{{month.name}}</option>
+            </select>
+          </div>
+        </div>
+
+      </form>
+    </section>
+  </main>
+</div>
