@@ -15,4 +15,10 @@ export class AppComponent {
   codeList: Code[] = CODES;
   monthList: Month[] = MONTHS;
 
+  characterLimit(event, limit){
+    if(event.target.value.length > limit -1 ) {
+      event.target.value = event.target.value.slice(0, (limit - 1))
+    }
+  }
+
 }

@@ -28,6 +28,9 @@ body, input, select {
 .align-end{
     align-items: flex-end;
 }
+.flex-grow {
+    flex-grow: 1;
+}
 
 @function rem-calc($size) {
     $remSize: $size / 16;
@@ -36,11 +39,14 @@ body, input, select {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
 
 input[type=number] {
     -moz-appearance: textfield;
-  }
+}
 
+select {
+    appearance: none;
+}
