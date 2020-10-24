@@ -1,3 +1,7 @@
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
 body{
     background: #242424;
     position: relative;
@@ -16,6 +20,7 @@ body, input, select {
     --lt-gray: #DADAED; 
     --dk-gray: #F9F9FB;
     --green: #1BFEC0;
+    --red: #EB5757;
 }
 
 .flex{
@@ -25,11 +30,21 @@ body, input, select {
     justify-content: space-between;
 }
 
+.position-relative{
+    position: relative;
+}
+
 .align-end{
     align-items: flex-end;
 }
 .flex-grow {
     flex-grow: 1;
+}
+
+.dropdown-arrow{
+    background-image: url('assets/img/dropdown_arrow.svg');
+    background-repeat: no-repeat;
+    background-position: 90% 50%;
 }
 
 @function rem-calc($size) {

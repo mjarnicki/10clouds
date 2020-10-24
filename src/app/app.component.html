@@ -10,21 +10,58 @@
     </aside>
     <section class="form__right-box">
       <h2 class="form__title">Provide personal information so that we can create a new account for you.</h2>
-      <form action="">
 
+      <form name="form" #f="ngForm">
+        
         <div class="form__row">
           <label class="form__input-label" for="name">Your name</label>
-          <input class="form__text-input" type="text" name="name" id="name" placeholder="name" required minlength="3">
+            
+          <input class="form__text-input" 
+            [ngClass]="{'form__text-input--invalid': (submitted && name.invalid)}"
+            type="text" 
+            name="name" 
+            id="name" 
+            placeholder="name" 
+            required 
+            minlength="4" 
+            [(ngModel)]="model.name"
+            #name="ngModel"
+          >
+          <div class="form__text-invalid">
+            Name invalid
+          </div>
         </div>
         
         <div class="form__row">
           <label class="form__input-label" for="area-code">Mobile</label>
           
           <div class="flex space-between">
-            <select class="form__text-input" name="area-code" id="area-code" required>
+            <select class="form__text-input dropdown-arrow"  
+              id="area-code"  
+              name="areaCode" 
+              [(ngModel)]="model.areaCode" 
+              required
+            >
               <option *ngFor="let code of codeList" value="{{code.dial_code}}">{{code.dial_code}} ({{code.code}})</option>
             </select>
-            <input class="form__text-input form__input--mobile" type="tel" name="tel" id="tel" placeholder="mobile" required minlength="9">
+            <div class="position-relative">
+              <input class="form__text-input form__input--mobile" 
+                [ngClass]="{'form__text-input--invalid': (submitted && tel.invalid)}"
+                type="tel" 
+                id="tel" 
+                placeholder="mobile" 
+                minlength="11" 
+                name="tel" 
+                [ngModel]="model.tel | formatTel" 
+                (ngModelChange)="model.tel=$event"
+                required 
+                #tel="ngModel"
+              >
+              <div class="form__text-invalid">
+                Telephone number invalid
+              </div>
+            </div>
+              
           </div>
         </div>
         <div class="form__row">
@@ -32,10 +69,23 @@
           
           <div class="flex">
             
-            <input class="form__radio-input" type="radio" id="play" name="chess" value="true">
+            <input class="form__radio-input" 
+              id="play" 
+              type="radio" 
+              name="chess" 
+              value="true"
+              checked
+              [(ngModel)]="model.chess"
+            >
             <label class="form__radio-label" for="play">Yes</label>
             
-            <input class="form__radio-input" type="radio" id="dont-play" name="chess" value="false" checked>
+            <input class="form__radio-input"
+              id="dont-play" 
+              type="radio" 
+              name="chess" 
+              value="false"
+              [(ngModel)]="model.chess"
+            >
             <label class="form__radio-label" for="dont-play">No</label>
             
           </div>
@@ -43,24 +93,66 @@
         </div>
         <div class="form__row">
           <label class="form__input-label">Date of birth</label>
-          <div class="flex align-end">
-            
-            <input class="form__date-input form__date-input--day" type="number" (keypress)="characterLimit($event, 2)" maxlength="2" min="1" max="31" placeholder="day" value="01">
-            
+          <div class="form__date-container">
+            <div class="position-relative">
+
+              <input class="form__date-input form__date-input--day" 
+              [ngClass]="{'form__date-input--invalid': (submitted && day.invalid)}"
+              type="number" 
+              (keypress)="characterLimit($event, 2)" 
+              min="1"
+              [max]="31" 
+              placeholder="day" 
+              name="day" 
+              [(ngModel)]="model.day"
+              #day="ngModel"
+              required
+              >
+              {{day.invalid}}
+              <div class="form__date-invalid">
+                Invalid day
+              </div>
+            </div>
             <span class="form__date-separator"></span>
             
-            <select class="form__date-input flex-grow" name="month" placeholder="month" required>
-              <option *ngFor="let month of monthList" value="{{month.value}}">{{month.name}}</option>
+            <select class="form__date-input dropdown-arrow" 
+              placeholder="month" 
+              name="month" 
+              [(ngModel)]="model.month"
+              required 
+            >
+              <ng-container *ngFor="let month of monthList">
+                <option 
+                  value="{{month.value}}"
+                  [disabled]="checkMonthLength(day.value, month.value, year.value)"
+                  required
+                >
+                  {{month.name}}
+                </option>
+              </ng-container>
             </select>
             
             <span class="form__date-separator"></span>
             
-            <input class="form__date-input flex-grow" type="number" (keypress)="characterLimit($event, 4)" min="1920" max="2020" placeholder="year" value="1990" maxlength="4">
-          
+            <input class="form__date-input" 
+              type="number" 
+              (keypress)="characterLimit($event, 4)" 
+              min="1920" 
+              max="2020" 
+              maxlength="4" 
+              placeholder="year" 
+              name="year"
+              [(ngModel)]="model.year"
+              #year="ngModel"
+              required
+            >
           </div>
         </div>
 
       </form>
+      <button class="form__continue-button" (click)="submit(f)">
+        CONTINUE
+      </button>
     </section>
   </main>
 </div>
