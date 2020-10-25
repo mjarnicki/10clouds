@@ -1,55 +1,55 @@
 export const MONTHS = [
     {
-        value: 1,
+        number: 1,
         name: "January",
     },
     {
-        value: 2,
+        number: 2,
         name: "February",
     },
     {
-        value: 3,
+        number: 3,
         name: "March",
     },
     {
-        value: 4,
+        number: 4,
         name: "April",
     },
     {
-        value: 5,
+        number: 5,
         name: "May",
     },
     {
-        value: 6,
+        number: 6,
         name: "June",
     },
     {
-        value: 7,
+        number: 7,
         name: "July",
     },
     {
-        value: 8,
+        number: 8,
         name: "August",
     },
     {
-        value: 9,
+        number: 9,
         name: "September",
     },
     {
-        value: 10,
+        number: 10,
         name: "October",
     },
     {
-        value: 11,
+        number: 11,
         name: "November",
     },
     {
-        value: 12,
+        number: 12,
         name: "December",
     },
 ]
 
 export interface Month {
-    value: number,
+    number: number,
     name: string,
 }

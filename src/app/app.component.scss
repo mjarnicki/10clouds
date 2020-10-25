@@ -175,7 +175,11 @@
         }
         &--invalid{
             color: var(--red);
-            border: 2px solid var(--lt-gray) !important;
+            border: 2px solid var(--red) !important;
+            ::-webkit-input-placeholder, ::-moz-placeholder, ::placeholder {
+                color: var(--red) !important;
+                opacity: 1;
+            }
             & + .form__date-invalid{
                 display: block;
             }
@@ -188,6 +192,7 @@
         left: 0;
         bottom: -4px;
         transform: translateY(100%);
+        color: var(--red);
     }
     &__date-separator{
         min-width: 10px;

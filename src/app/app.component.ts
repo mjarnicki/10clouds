@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { FormControl, NgForm, Validators } from '@angular/forms';
+import { FormControl, NgForm, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { CODES } from './models/country-codes';
 import { Code } from './models/country-codes';
 import { MONTHS } from './models/months';
 import { Month } from './models/months';
+import { MaxDay } from './helpers/max-day.validator';
+import { OfAge } from './helpers/of-age.validator';
 
 @Component({
   selector: 'app-root',
@@ -18,30 +20,39 @@ export class AppComponent {
 
   submitted: boolean = false;
 
-  model: Partial<any>;
+  model: FormGroup;
+
+ 
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.model = {
-      name: 'Ma',
-      areaCode: "+48",
-      tel: '55555',
-      chess: 'false',
-      day: 44,
-      month: 1,
-      year: 2000,
-    };
+    this.model = this.formBuilder.group({
+      name: ["", Validators.required],
+      areaCode: ["+48", Validators.required],
+      tel: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+      chess: ['false', Validators.required],
+      day: [1, [Validators.required, Validators.min(1)]],
+      month: [1, Validators.required],
+      year: [2000, [Validators.required, Validators.min(1920), Validators.max(new Date().getFullYear())]],
+    }, {
+      validator: [MaxDay(), OfAge()]
+    });
   }
 
-  submit(form: NgForm) {
+  get f() { 
+    this.model.controls['day'].updateValueAndValidity();
+    return this.model.controls; 
+  }
+
+  onSubmit() {
+
     this.submitted = true;
-    if(form.valid){
-      console.log('formularz jest ok, teraz sprawdź datę');
-    }
+
+    console.log(this.model.value);
+        // stop here if form is invalid
   }
 
-  dayLimit = new FormControl("", [Validators.max(100), Validators.min(0)])
-
-  checkMonthLength(day, month, year) {
+  checkMonthLength(day: number, month: number, year: number) {
 
     if(((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)){
       if(day > 29 && month === 2){
@@ -62,11 +73,4 @@ export class AppComponent {
       return true
     }
   }
-
-  characterLimit(event, limit){
-    if(event.target.value.length > limit -1 ) {
-      event.target.value = event.target.value.slice(0, (limit - 1))
-    }
-  }
-
 }
