@@ -14,17 +14,34 @@ body, input, select {
     font-family: 'Roboto', sans-serif;
 }
 
+ul {
+    margin-block-start: 0 !important;
+    margin-block-end: 0 !important;
+    padding-inline-start: 0 !important;
+    list-style-type: none;
+}
+
+select{
+    cursor: pointer;
+}
+
 :root {
     --primary-color: #8658EB;
     --secondary-color: #652AE6;
     --lt-gray: #DADAED; 
-    --dk-gray: #F9F9FB;
+    --dk-gray: #59595A;
     --green: #1BFEC0;
     --red: #EB5757;
 }
 
 .flex{
     display: flex;
+}
+.block{
+    display: block !important;
+}
+.none{
+    display: none !important;
 }
 .space-between{
     justify-content: space-between;
@@ -39,6 +56,10 @@ body, input, select {
 }
 .flex-grow {
     flex-grow: 1;
+}
+
+.hidden{
+    visibility: hidden;
 }
 
 .dropdown-arrow{

@@ -4,8 +4,8 @@ import { CODES } from './models/country-codes';
 import { Code } from './models/country-codes';
 import { MONTHS } from './models/months';
 import { Month } from './models/months';
+import { NavElement } from './models/nav-element';
 import { MaxDay } from './helpers/max-day.validator';
-import { OfAge } from './helpers/of-age.validator';
 
 @Component({
   selector: 'app-root',
@@ -19,28 +19,52 @@ export class AppComponent {
   monthList: Month[] = MONTHS;
 
   submitted: boolean = false;
+  showMonthAsNumber = false
 
   model: FormGroup;
 
- 
-  constructor(private formBuilder: FormBuilder) { }
+  asideNavList: Array<NavElement> = [
+    {
+      name: "Test",
+      active: false
+    },
+    {
+      name: "Personal",
+      active: true
+    },
+    {
+      name: "Test 2",
+      active: false
+    },
+  ]
 
+  
+  constructor(private formBuilder: FormBuilder) { }
+  
   ngOnInit(): void {
     this.model = this.formBuilder.group({
       name: ["", Validators.required],
       areaCode: ["+48", Validators.required],
       tel: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
       chess: ['false', Validators.required],
-      day: [1, [Validators.required, Validators.min(1)]],
-      month: [1, Validators.required],
-      year: [2000, [Validators.required, Validators.min(1920), Validators.max(new Date().getFullYear())]],
+      day: [25, [Validators.required, Validators.min(1)]],
+      month: [10, Validators.required],
+      year: [2002, [Validators.required, Validators.min(1920), Validators.max(new Date().getFullYear())]],
     }, {
-      validator: [MaxDay(), OfAge()]
+      validator: [MaxDay()]
     });
+    this.montDataType();
+  }
+
+  montDataType() {
+    if (window.innerWidth > 500){
+      this.showMonthAsNumber = false
+    } else {
+      this.showMonthAsNumber = true
+    }
   }
 
   get f() { 
-    this.model.controls['day'].updateValueAndValidity();
     return this.model.controls; 
   }
 
@@ -48,8 +72,6 @@ export class AppComponent {
 
     this.submitted = true;
 
-    console.log(this.model.value);
-        // stop here if form is invalid
   }
 
   checkMonthLength(day: number, month: number, year: number) {
@@ -73,4 +95,25 @@ export class AppComponent {
       return true
     }
   }
+
+  ifUnderAge(inputDay, inputMonth, inputYear){
+      const currentDate = new Date();
+      const currentYear = currentDate.getFullYear();
+      const currentMonth = currentDate.getMonth();
+      const currentDay = currentDate.getDate(); 
+      
+      let calculatedAge = currentYear - inputYear;
+  
+      if (currentMonth < inputMonth - 1) {
+          calculatedAge--;
+      }
+      if (inputMonth - 1 == currentMonth && currentDay < inputDay) {
+          calculatedAge--;
+      }
+      if(calculatedAge < 18) {
+          return true;
+      } else {
+        return false;
+      }
+    }
 }
