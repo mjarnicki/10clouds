@@ -31,9 +31,9 @@
       <h2 class="form__title">Provide personal information so that we can create a new account for you.</h2>
         
         <app-text-input 
-          [label]="'Your name'" 
-          [placeholder]="'name'"
-          [invalidMessage]="'Name invalid'" 
+          label="Your name"
+          placeholder="name"
+          invalidMessage="Name invalid" 
           [submitted]="submittedPersonal"
           [form]="personalControls"
           formControlName="name" 
@@ -41,21 +41,21 @@
         ></app-text-input>
 
         <app-mobile-input
-          [label]="'Mobile'" 
-          [invalidMessage]="'Tel number invalid'" 
+          label="Mobile" 
+          invalidMessage="Tel number invalid" 
           [submitted]="submittedPersonal"
           [form]="personalControls"
           formGroupName="mobile" 
         ></app-mobile-input>
 
         <app-radio-input
-          [label]="'Can you play chess?'"
+          label="Can you play chess?"
           formControlName="chess"
           ngDefaultControl
         ></app-radio-input>
           
         <app-age-input
-          [label]="'Date of birth'"
+          label="Date of birth"
           [submitted]="submittedPersonal"
           [form]="personalControls"
           formGroupName="age" 

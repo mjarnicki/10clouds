@@ -58,16 +58,16 @@ export class AppComponent {
       }),
       chess: ['false', Validators.required],
       age: this.formBuilder.group({
-        day: [29, Validators.required],
+        day: ['', Validators.required],
         month: [2, Validators.required],
-        year: [2000, [Validators.required, Validators.min(1920), Validators.max(new Date().getFullYear())]],
+        year: ['', [Validators.required, Validators.min(1920), Validators.max(new Date().getFullYear())]],
       }, {
         validator: [DayValue(), UnderAge()]
       }),
     });
 
     this.test2 = this.formBuilder.group({
-      something: ["", [Validators.required, Validators.minLength(3)]],
+      something: ['', [Validators.required, Validators.minLength(3)]],
     })
   }
 
