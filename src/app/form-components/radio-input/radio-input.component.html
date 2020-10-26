@@ -1,0 +1,27 @@
+<div class="form__row">
+    <label class="form__input-label">{{label}}</label>
+    
+    <div class="flex">
+      
+      <input class="form__radio-input" 
+        id="true" 
+        type="radio" 
+        name="chess"
+        value="true"
+        checked
+        [formControlName]="formControlName"
+      >
+      <label class="form__radio-label" for="true">Yes</label>
+      
+      <input class="form__radio-input"
+        id="false" 
+        type="radio" 
+        value="false"
+        name="chess"
+        [formControlName]="formControlName"
+      >
+      <label class="form__radio-label" for="false">No</label>
+      
+    </div>
+    
+  </div>

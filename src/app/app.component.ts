@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { FormControl, NgForm, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { CODES } from './models/country-codes';
-import { Code } from './models/country-codes';
-import { MONTHS } from './models/months';
-import { Month } from './models/months';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+
+
 import { NavElement } from './models/nav-element';
 import { MaxDay } from './helpers/max-day.validator';
+import { UnderAge } from './helpers/under-age.validator';
 
 @Component({
   selector: 'app-root',
@@ -15,105 +14,111 @@ import { MaxDay } from './helpers/max-day.validator';
 export class AppComponent {
   title = 'clouds';
 
-  codeList: Code[] = CODES;
-  monthList: Month[] = MONTHS;
+  buttonText: string = 'continue'
+  showSummaryText: boolean = false;
 
-  submitted: boolean = false;
-  showMonthAsNumber = false
+  submittedTest1: boolean = false;
+  submittedPersonal: boolean = false;
+  submittedTest2: boolean = false;
 
-  model: FormGroup;
+  test1: FormGroup;
+  personal: FormGroup;
+  test2: FormGroup;
 
-  asideNavList: Array<NavElement> = [
+  formResult: object = {};
+
+  sectionListStatus: Array<NavElement> = [
     {
       name: "Test",
-      active: false
+      active: true
     },
     {
       name: "Personal",
-      active: true
+      active: false
     },
     {
       name: "Test 2",
       active: false
     },
   ]
-
   
   constructor(private formBuilder: FormBuilder) { }
   
   ngOnInit(): void {
-    this.model = this.formBuilder.group({
-      name: ["", Validators.required],
-      areaCode: ["+48", Validators.required],
-      tel: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+
+    this.test1 = this.formBuilder.group({
+      anything: ['', [Validators.required, Validators.minLength(3)]],
+    })
+
+    this.personal = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      mobile: this.formBuilder.group({
+        areaCode: ["+48", Validators.required],
+        tel: ['222 222 222', [Validators.required, Validators.minLength(11), Validators.maxLength(12)]],
+      }),
       chess: ['false', Validators.required],
-      day: [25, [Validators.required, Validators.min(1)]],
-      month: [10, Validators.required],
-      year: [2002, [Validators.required, Validators.min(1920), Validators.max(new Date().getFullYear())]],
-    }, {
-      validator: [MaxDay()]
+      age: this.formBuilder.group({
+        day: [26, [Validators.required, Validators.min(1)]],
+        month: [10, Validators.required],
+        year: [2002, [Validators.required, Validators.min(1920), Validators.max(new Date().getFullYear())]],
+      }, {
+        validator: [MaxDay(), UnderAge()]
+      }),
     });
-    this.montDataType();
+
+    this.test2 = this.formBuilder.group({
+      something: ["", [Validators.required, Validators.minLength(3)]],
+    })
   }
 
-  montDataType() {
-    if (window.innerWidth > 500){
-      this.showMonthAsNumber = false
-    } else {
-      this.showMonthAsNumber = true
-    }
+  get test1Controls() { 
+    return this.test1.controls; 
+  }
+  get personalControls() { 
+    return this.personal.controls; 
+  }
+  get test2Controls() { 
+    return this.test2.controls; 
   }
 
-  get f() { 
-    return this.model.controls; 
+  onSubmitTest1(){
+    this.submittedTest1 = true;
+    this.submitSection(this.test1, 1);
   }
-
-  onSubmit() {
-
-    this.submitted = true;
-
-  }
-
-  checkMonthLength(day: number, month: number, year: number) {
-
-    if(((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)){
-      if(day > 29 && month === 2){
-        return true
-      }
-    }
-    else {
-      if(day > 28 && month === 2){
-        return true
-      }
-    }
-
-    if(day > 30 && (month === 4 || month === 6 || month === 9 || month === 11)){
-      return true
-    }
-
-    if(day > 31){
-      return true
-    }
-  }
-
-  ifUnderAge(inputDay, inputMonth, inputYear){
-      const currentDate = new Date();
-      const currentYear = currentDate.getFullYear();
-      const currentMonth = currentDate.getMonth();
-      const currentDay = currentDate.getDate(); 
-      
-      let calculatedAge = currentYear - inputYear;
   
-      if (currentMonth < inputMonth - 1) {
-          calculatedAge--;
+  onSubmitPersonal() {
+    this.submittedPersonal = true;
+    this.submitSection(this.personal, 2);
+  }
+  
+  onSubmitTest2(){
+    this.submittedTest2 = true;
+    this.submitSection(this.test2, false);
+  }
+
+  submitSection(form, sectionNumber){
+    if(form.valid){
+
+      this.sectionListStatus.forEach(element => {
+        element.active = false
+      });
+
+      this.formResult = Object.assign(this.formResult, form.value)
+      
+      if((this.sectionListStatus.length - 1) == sectionNumber){
+        this.buttonText = "submit"
       }
-      if (inputMonth - 1 == currentMonth && currentDay < inputDay) {
-          calculatedAge--;
-      }
-      if(calculatedAge < 18) {
-          return true;
+      
+      if (sectionNumber){
+        this.sectionListStatus[sectionNumber].active = true
       } else {
-        return false;
+        this.sectionListStatus.forEach(element => {
+          element.active = false
+        });
+        this.showSummaryText = true;
+        console.log(this.formResult);
       }
+
     }
+  }
 }

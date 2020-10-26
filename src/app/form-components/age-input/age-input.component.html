@@ -1,0 +1,65 @@
+<ng-container [formGroup]="controlContainer.control"> 
+<div class="form__row">
+    <label class="form__input-label">Date of birth</label>
+    <div class="form__date-container">
+      
+      <div class="position-relative">
+        <input class="form__date-input form__date-input--day" 
+          [ngClass]="{'form__date-input--invalid': (submitted && form.age.controls.day.errors)}"
+          aria-label="day"
+          type="number" 
+          placeholder="day" 
+          name="day"
+          formControlName="day"
+        >
+        <div class="form__date-invalid" *ngIf="submitted && form.age.controls.day.errors">
+          Invalid day
+        </div>
+      </div>
+
+      <span class="form__date-separator"></span>
+      
+      <div class="position-relative">
+        <select class="form__date-input form__date-input--month dropdown-arrow" 
+          placeholder="month" 
+          name="month"
+          aria-label="month"
+          formControlName="month"
+          (window:resize)="montDataType()"
+        >
+          <ng-container *ngFor="let month of monthList">
+            <option 
+              value="{{month.number}}"
+              [disabled]="checkMonthLength(form.age.controls.day.value, month.number, form.age.controls.year.value)"
+            >
+              <ng-container *ngIf="!showMonthAsNumber">
+                {{month.name}}
+              </ng-container>
+              <ng-container *ngIf="showMonthAsNumber">
+                {{month.number}}
+              </ng-container>
+            </option>
+          </ng-container>
+        </select>
+        <div class="form__date-invalid" *ngIf="submitted && form.age.controls.month.errors">
+          You are under 18!
+        </div>
+      </div>
+      
+      <span class="form__date-separator"></span>
+      <div class="position-relative">
+        <input class="form__date-input" 
+          [ngClass]="{'form__date-input--invalid': (submitted && form.age.controls.year.errors)}"
+          type="number" 
+          name="year"
+          aria-label="year"
+          placeholder="year" 
+          formControlName="year"
+          >
+        <div class="form__date-invalid" *ngIf="submitted && form.age.controls.year.errors">
+          Invalid year
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

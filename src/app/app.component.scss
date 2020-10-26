@@ -91,13 +91,7 @@
         }
     }
     &__aside-nav{
-        cursor: pointer;
         margin-top: 42px;
-        &:hover, &:focus{
-            & > .form__aside-nav-line{
-                background-color: var(--green);
-            }
-        }
     }
     &__aside-nav-line{
         width: 25px;
@@ -209,14 +203,28 @@
         }
         &:hover{
             outline: none;
-            border-color: var(--green);
+            border-color: var(--secondary-color) !important;
             transition: border-color .25s ease-in-out;
             &:after{
                 transition: border-color .25s ease-in-out;
-                border-color: var(--green);
+                border-color: var(--secondary-color) !important;
             }
             &:before{
                 transition: opacity .25s ease-in-out;
+                background-color: var(--secondary-color) !important;
+            }
+        }
+        &:focus{
+            outline: none;
+            border-color: var(--secondary-color) !important;
+            transition: border-color .25s ease-in-out;
+            &:after{
+                transition: border-color .25s ease-in-out;
+                border-color: var(--secondary-color) !important;
+            }
+            &:before{
+                transition: opacity .25s ease-in-out;
+                background-color: var(--secondary-color) !important;
                 opacity: 1;
             }
         }
@@ -226,12 +234,22 @@
             margin-top: 20px;
             opacity: 0;
             z-index: -10;
-        &:checked + .form__radio-label, &:focus + .form__radio-label{
+        &:checked + .form__radio-label{
             border-color: var(--green);
             &:after{
                 border-color: var(--green);
             }
             &:before{
+                opacity: 1;
+            }
+        }
+        &:focus + .form__radio-label{
+            border-color: var(--secondary-color);
+            &:after{
+                border-color: var(--secondary-color);
+            }
+            &:before{
+                background-color: var(--secondary-color);
                 opacity: 1;
             }
         }
@@ -254,7 +272,7 @@
             width: 114px;
         }
         &:focus, &:hover {
-            border-color: var(--green);
+            border-color: var(--secondary-color);
             transition: border-color 0.25s ease-in-out;
         }
         &--day{
@@ -293,6 +311,7 @@
         margin: 0 6px;
     }
     &__continue-button{
+        text-transform: uppercase;
         position: absolute;
         bottom: 0;
         right: -1px;
