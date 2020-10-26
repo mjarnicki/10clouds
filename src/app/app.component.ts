@@ -59,7 +59,7 @@ export class AppComponent {
       chess: ['false', Validators.required],
       age: this.formBuilder.group({
         day: ['', Validators.required],
-        month: [2, Validators.required],
+        month: [1, Validators.required],
         year: ['', [Validators.required, Validators.min(1920), Validators.max(new Date().getFullYear())]],
       }, {
         validator: [DayValue(), UnderAge()]
