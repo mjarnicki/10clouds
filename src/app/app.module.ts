@@ -9,6 +9,7 @@ import { TextInputComponent } from './form-components/text-input/text-input.comp
 import { RadioInputComponent } from './form-components/radio-input/radio-input.component';
 import { MobileInputComponent } from './form-components/mobile-input/mobile-input.component';
 import { AgeInputComponent } from './form-components/age-input/age-input.component';
+import { SectionsInfoAsideComponent } from './sections-info-aside/sections-info-aside.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AgeInputComponent } from './form-components/age-input/age-input.compone
     RadioInputComponent,
     MobileInputComponent,
     AgeInputComponent,
+    SectionsInfoAsideComponent,
   ],
   imports: [
     BrowserModule,

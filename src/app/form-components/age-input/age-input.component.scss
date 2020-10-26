@@ -1,1 +1,61 @@
-@import "../../app.component.scss"
+@import "../../../styles/sass-functions.scss";
+@import "../../../styles/form-global-styles.scss";
+
+.form{
+    &__date-container{
+        display: flex;
+        padding-top: 14px;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__date-input{
+        border: 2px solid var(--lt-gray);
+        padding: 15px;
+        height: 52px;
+        font-size: 1rem;
+        width: 135px;
+        outline: none;
+        transition: border-color 0.25s ease-in-out;
+        @media (max-width: 500px){
+            width: 114px;
+        }
+        &:focus, &:hover {
+            border-color: var(--secondary-color);
+            transition: border-color 0.25s ease-in-out;
+        }
+        &--day{
+            text-align: center;
+            padding: 15px 5px;
+            width: 52px;
+        }
+        &--month{
+            text-align: center;
+            @media (max-width: 500px){
+                width: 52px;
+                padding: 12px;
+            }
+        }
+        &--invalid{
+            color: var(--red);
+            border: 2px solid var(--red) !important;
+            ::-webkit-input-placeholder, ::-moz-placeholder, ::placeholder {
+                color: var(--red) !important;
+                opacity: 1;
+            }
+        }
+    }
+    &__date-invalid{
+        font-size: rem-calc(11);
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        transform: translateY(100%);
+        color: var(--red);
+    }
+    &__date-separator{
+        min-width: 10px;
+        height: 2px;
+        background-color: var(--lt-gray);
+        margin: 0 6px;
+    }
+}

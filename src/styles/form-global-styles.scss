@@ -1,0 +1,21 @@
+.form{
+    &__row{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        margin-bottom: 24px;
+        position: relative;
+    }
+    &__label{
+        font-size: rem-calc(11);
+        margin-left: 1rem;
+    }
+    &__text-invalid{
+        color: var(--red);
+        font-size: rem-calc(11);
+        position: absolute;
+        left: 1rem;
+        bottom: -4px;
+        transform: translateY(100%);
+    }
+}

@@ -50,5 +50,4 @@ export class AgeInputComponent {
         this.showMonthAsNumber = true
       }
     }
-
 }

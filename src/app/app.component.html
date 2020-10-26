@@ -11,7 +11,7 @@
     <section class="form__right-box">
 
       <form [formGroup]="test1" (ngSubmit)="onSubmitTest1()" *ngIf="sectionListStatus[0].active">
-        <h2 class="form__title">First form element. Continue to proceed to personal section.</h2>
+        <h2 class="form__title">First form element. Continue to proceed to section "personal" .</h2>
         <app-text-input 
           label="Type anything" 
           placeholder="anything"
@@ -88,18 +88,9 @@
       <h2 class="form__title" *ngIf="showSummaryText">
         Form has been filled succesfully. You can check results in browser's console.
       </h2>
+
+      <app-sections-info-aside [sectionListStatus]="sectionListStatus"></app-sections-info-aside>
                 
-      <ul class="form__aside-nav-container">
-        <li class="form__aside-nav" *ngFor="let navElement of sectionListStatus; let i = index">
-          <div class="form__aside-nav-line" [ngClass]="{'form__aside-nav-line--active': navElement.active}"></div>
-          <div class="form__aside-nav-content">
-            0{{i + 1}}
-          </div>
-          <div class="form__aside-nav-content" [ngClass]="{'hidden': !navElement.active}">
-            {{navElement.name}}
-          </div>
-        </li>
-      </ul>
     </section>
   </main>
 </div>

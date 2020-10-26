@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 import { NavElement } from './models/nav-element';
-import { MaxDay } from './helpers/max-day.validator';
+import { DayValue } from './helpers/day-value.validator';
 import { UnderAge } from './helpers/under-age.validator';
 
 @Component({
@@ -54,15 +54,15 @@ export class AppComponent {
       name: ['', [Validators.required, Validators.minLength(3)]],
       mobile: this.formBuilder.group({
         areaCode: ["+48", Validators.required],
-        tel: ['222 222 222', [Validators.required, Validators.minLength(11), Validators.maxLength(12)]],
+        tel: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(12)]],
       }),
       chess: ['false', Validators.required],
       age: this.formBuilder.group({
-        day: [26, [Validators.required, Validators.min(1)]],
-        month: [10, Validators.required],
-        year: [2002, [Validators.required, Validators.min(1920), Validators.max(new Date().getFullYear())]],
+        day: [29, Validators.required],
+        month: [2, Validators.required],
+        year: [2000, [Validators.required, Validators.min(1920), Validators.max(new Date().getFullYear())]],
       }, {
-        validator: [MaxDay(), UnderAge()]
+        validator: [DayValue(), UnderAge()]
       }),
     });
 

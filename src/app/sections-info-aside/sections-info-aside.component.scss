@@ -1,0 +1,29 @@
+@import "../../styles/form-global-styles.scss";
+@import "../../styles/sass-functions.scss";
+
+.sections-info-aside{
+    margin-top: 42px;
+
+    &__container{
+        position: absolute;
+        top: 66px;
+        right: -1px;
+        transform: translateX(100%);
+        color: white;
+        font-size: rem-calc(11);
+        @media (max-width: 992px){
+            display: none;
+        }
+    }
+    &__line{
+        width: 25px;
+        height: 2px;
+        background-color: var(--dk-gray);
+        &--active{
+            background-color: var(--green);
+        }
+    }
+    &__content{
+        margin: 8px 0 0 8px;
+    }
+}

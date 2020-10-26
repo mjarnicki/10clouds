@@ -1,1 +1,22 @@
-@import "../../app.component.scss"
+@import "../../../styles/sass-functions.scss";
+@import "../../../styles/form-global-styles.scss";
+
+.form__text-input{
+    font-size: 1rem;
+    padding: 12px 12px 12px 15px;
+    border: none;
+    border-bottom: 2px solid var(--lt-gray);
+    position: relative;
+    transition: border-bottom .25s ease-in-out;
+    
+    &--invalid{
+        color: var(--red);
+        border-bottom: 2px solid var(--red) !important;
+    }
+
+    &:focus, &:hover{
+        transition: border-bottom .25s ease-in-out;
+        border-bottom: 2px solid var(--secondary-color);
+        outline: none;
+    }
+}

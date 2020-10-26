@@ -1,9 +1,9 @@
 <ng-container [formGroup]="controlContainer.control"> 
     <div class="form__row">
-        <label class="form__input-label">{{label}}</label>
+        <label class="form__label">{{label}}</label>
         
         <div class="flex space-between">
-        <select class="form__text-input dropdown-arrow" 
+        <select class="form__mobile-input dropdown-arrow" 
             aria-label="area code"
             name="area-code" 
             id="area-code"  
@@ -12,9 +12,9 @@
             <option *ngFor="let code of codeList" value="{{code.dial_code}}">{{code.dial_code}} ({{code.code}})</option>
         </select>
         <div class="position-relative">
-            <input class="form__text-input form__text-input--mobile" 
+            <input class="form__mobile-input form__mobile-input--tel-no" 
             aria-label="mobile number"
-            [ngClass]="{'form__text-input--invalid': (submitted && form.mobile.controls.tel.errors)}"
+            [ngClass]="{'form__mobile-input--invalid': (submitted && form.mobile.controls.tel.errors)}"
             type="tel" 
             id="tel" 
             name="tel"
@@ -22,7 +22,7 @@
             appPhoneMask
             formControlName="tel" 
             >
-            <div class="form__text-invalid">
+            <div class="form__text-invalid" *ngIf="submitted && form.mobile.controls.tel.errors">
             {{invalidMessage}}
             </div>
         </div>

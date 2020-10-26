@@ -1,0 +1,11 @@
+<ul class="sections-info-aside__container">
+    <li class="sections-info-aside" *ngFor="let navElement of sectionListStatus; let i = index">
+      <div class="sections-info-aside__line" [ngClass]="{'sections-info-aside__line--active': navElement.active}"></div>
+      <div class="sections-info-aside__content">
+        0{{i + 1}}
+      </div>
+      <div class="sections-info-aside__content" [ngClass]="{'hidden': !navElement.active}">
+        {{navElement.name}}
+      </div>
+    </li>
+  </ul>

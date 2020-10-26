@@ -11,11 +11,7 @@ export function UnderAge() {
         const currentMonth = currentDate.getMonth();
         const currentDay = currentDate.getDate(); 
 
-        console.log(day.value, month.value, year.value, "wpisana data");
-        console.log(currentDay, currentMonth, currentYear, "dzisiaj");
-      
       let calculatedAge = currentYear - year.value;
-      console.log(calculatedAge);
   
       if (currentMonth < month.value - 1) {
           calculatedAge--;

@@ -1,1 +1,91 @@
-@import "../../app.component.scss"
+@import "../../../styles/sass-functions.scss";
+@import "../../../styles/form-global-styles.scss";
+
+.form{
+    &__radio-label{
+        width: 46px;
+        height: 46px;
+        padding-right: 7px;
+        border: 2px solid var(--lt-gray);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 12px 25px 0 0;
+        position: relative;
+        cursor: pointer;
+        transition: border-color .25s ease-in-out;
+        &:after{
+            content: '';
+            position: absolute;
+            width: 11px;
+            height: 11px;
+            transition: border-color .25s ease-in-out;
+            border: 2px solid var(--lt-gray);
+            background-color: #fff;
+            left: calc(100% - 5px);
+        }
+        &:before{
+            content: '';
+            z-index: 1;
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: var(--green);
+            left: calc(100% - 1px);
+            transition: opacity .25s ease-in-out;
+            opacity: 0;
+        }
+        &:hover{
+            outline: none;
+            border-color: var(--secondary-color) !important;
+            transition: border-color .25s ease-in-out;
+            &:after{
+                transition: border-color .25s ease-in-out;
+                border-color: var(--secondary-color) !important;
+            }
+            &:before{
+                transition: opacity .25s ease-in-out;
+                background-color: var(--secondary-color) !important;
+            }
+        }
+        &:focus{
+            outline: none;
+            border-color: var(--secondary-color) !important;
+            transition: border-color .25s ease-in-out;
+            &:after{
+                transition: border-color .25s ease-in-out;
+                border-color: var(--secondary-color) !important;
+            }
+            &:before{
+                transition: opacity .25s ease-in-out;
+                background-color: var(--secondary-color) !important;
+                opacity: 1;
+            }
+        }
+    }
+    &__radio-input{
+            position: absolute;
+            margin-top: 20px;
+            opacity: 0;
+            z-index: -10;
+        &:checked + .form__radio-label{
+            border-color: var(--green);
+            &:after{
+                border-color: var(--green);
+            }
+            &:before{
+                opacity: 1;
+            }
+        }
+        &:focus + .form__radio-label{
+            border-color: var(--secondary-color);
+            &:after{
+                border-color: var(--secondary-color);
+            }
+            &:before{
+                background-color: var(--secondary-color);
+                opacity: 1;
+            }
+        }
+    }
+}

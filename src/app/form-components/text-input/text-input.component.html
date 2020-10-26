@@ -1,5 +1,5 @@
 <div class="form__row">
-    <label class="form__input-label" [for]="formControlName">{{label}}</label>
+    <label class="form__label" [for]="formControlName">{{label}}</label>
         
     <input class="form__text-input" 
         [ngClass]="{'form__text-input--invalid': (submitted && formControlText.errors)}"
@@ -9,7 +9,7 @@
         [placeholder]="placeholder" 
         [formControlName]="formControlName"
     >
-    <div class="form__text-invalid">
+    <div class="form__text-invalid" *ngIf="submitted && formControlText.errors">
         {{invalidMessage}}
     </div>
 </div>
